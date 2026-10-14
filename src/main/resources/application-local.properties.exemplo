@@ -1,0 +1,5 @@
+# Copie este arquivo para application-local.properties (na mesma pasta)
+# e preencha com o SEU usuario e senha do Oracle da FIAP.
+# O application-local.properties esta no .gitignore: ele nunca vai para o GitHub.
+spring.datasource.username=rmXXXXXX
+spring.datasource.password=sua_senha

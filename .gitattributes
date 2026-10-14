@@ -1,0 +1,7 @@
+# Normaliza finais de linha para evitar diffs falsos entre Windows e Mac
+* text=auto eol=lf
+/mvnw text eol=lf
+*.cmd text eol=crlf
+*.jar binary
+*.docx binary
+*.png binary

@@ -1,0 +1,25 @@
+# Quem precisa revisar cada parte do projeto.
+# Dono padrao: professor Evando Borges.
+# Depois da Entrega 2, descomente as linhas dos modulos e coloque os usuarios de cada grupo.
+
+# Tudo que nao tiver dono especifico (pom.xml, configuracoes, compartilhado, .github)
+*                                                    @prof-evando-borges
+
+# /src/main/java/br/com/fiap/delegaciapolicia/policiais/          @aluno1 @aluno2
+# /src/main/resources/banco-de-dados/01-policiais.sql             @aluno1 @aluno2
+# /src/main/java/br/com/fiap/delegaciapolicia/fichas/             @aluno1 @aluno2
+# /src/main/resources/banco-de-dados/02-fichas.sql                @aluno1 @aluno2
+# /src/main/java/br/com/fiap/delegaciapolicia/folha/              @aluno1 @aluno2
+# /src/main/resources/banco-de-dados/03-folha.sql                 @aluno1 @aluno2
+# /src/main/java/br/com/fiap/delegaciapolicia/estoque/            @aluno1 @aluno2
+# /src/main/resources/banco-de-dados/04-estoque.sql               @aluno1 @aluno2
+# /src/main/java/br/com/fiap/delegaciapolicia/chamadas/           @aluno1 @aluno2
+# /src/main/resources/banco-de-dados/05-chamadas.sql              @aluno1 @aluno2
+# /src/main/java/br/com/fiap/delegaciapolicia/rondas/             @aluno1 @aluno2
+# /src/main/resources/banco-de-dados/06-rondas.sql                @aluno1 @aluno2
+# /src/main/java/br/com/fiap/delegaciapolicia/boletins/           @aluno1 @aluno2
+# /src/main/resources/banco-de-dados/07-boletins.sql              @aluno1 @aluno2
+# /src/main/java/br/com/fiap/delegaciapolicia/patio/              @aluno1 @aluno2
+# /src/main/resources/banco-de-dados/08-patio.sql                 @aluno1 @aluno2
+# /src/main/java/br/com/fiap/delegaciapolicia/prisoes/            @aluno1 @aluno2
+# /src/main/resources/banco-de-dados/09-prisoes.sql               @aluno1 @aluno2
