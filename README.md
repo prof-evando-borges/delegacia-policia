@@ -6,8 +6,6 @@ Java 21 · Spring Boot 4.1 · Spring Data JPA · Oracle
 
 ## Arquitetura: monólito modular
 
-Com cerca de 40 pessoas no mesmo repositório, o código é organizado **por módulo, não por camada**. Cada grupo tem o seu pacote e o seu script, e não precisa tocar em arquivos de outro grupo. Resultado: quase nenhum conflito de merge.
-
 ```
 src/main/java/br/com/fiap/delegaciapolicia
 ├── DelegaciaPoliciaApplication.java
