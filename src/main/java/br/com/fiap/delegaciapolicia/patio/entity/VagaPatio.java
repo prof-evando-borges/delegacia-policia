@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,12 +25,17 @@ public class VagaPatio {
     @Column(name = "ID")
     private Long id;
 
+    @NotBlank
+    @Size(max = 10)
     @Column(name = "CODIGO", nullable = false, length = 10)
     private String codigo;
 
+    @NotBlank
+    @Size(max = 30)
     @Column(name = "SETOR", nullable = false, length = 30)
     private String setor;
 
+    @NotNull
     @Column(name = "OCUPADA", nullable = false)
     private Boolean ocupada;
 

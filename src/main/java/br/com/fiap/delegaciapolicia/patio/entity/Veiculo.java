@@ -11,6 +11,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,22 +32,32 @@ public class Veiculo {
     @Column(name = "ID")
     private Long id;
 
+    @NotBlank
+    @Size(max = 7)
     @Column(name = "PLACA", nullable = false, length = 7)
     private String placa;
 
+    @NotBlank
+    @Size(max = 40)
     @Column(name = "MARCA", nullable = false, length = 40)
     private String marca;
 
+    @NotBlank
+    @Size(max = 60)
     @Column(name = "MODELO", nullable = false, length = 60)
     private String modelo;
 
+    @NotBlank
+    @Size(max = 30)
     @Column(name = "COR", nullable = false, length = 30)
     private String cor;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "TIPO", nullable = false, length = 20)
     private TipoVeiculo tipo;
 
+    @NotNull
     @Column(name = "DATA_ENTRADA", nullable = false)
     private LocalDate dataEntrada;
 
@@ -55,7 +68,7 @@ public class Veiculo {
     @JoinColumn(name = "ID_VAGA_PATIO")
     private VagaPatio vaga;
 
-    // Falta criar o atributo Registro
-
-    // private Registro registro
+    // Tabela de outro modulo (07-boletins). guardar so o id
+    @Column(name = "ID_REGISTRO")
+    private Long idRegistro;
 }
