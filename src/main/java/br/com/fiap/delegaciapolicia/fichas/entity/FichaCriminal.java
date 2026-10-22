@@ -44,8 +44,8 @@ public class FichaCriminal {
     @Column(name = "DATA_CRIACAO", nullable = false)
     private LocalDateTime dataCriacao;
 
-   // @OneToMany(mappedBy = "ficha")
-   // private java.util.List<Crime> crimes; // preencher após o Integrante 3 criar Crime
+    @OneToMany(mappedBy = "ficha")
+    private java.util.List<Crime> crimes; // preencher após o Integrante 3 criar Crime
 
     // getters e setters
 
