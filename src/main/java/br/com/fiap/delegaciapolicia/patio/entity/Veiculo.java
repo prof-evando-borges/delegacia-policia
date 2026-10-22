@@ -54,4 +54,8 @@ public class Veiculo {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_VAGA_PATIO")
     private VagaPatio vaga;
+
+    // Falta criar o atributo Registro
+
+    // private Registro registro
 }
