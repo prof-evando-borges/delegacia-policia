@@ -1,6 +1,6 @@
-package br.com.fiap.delegaciapolicia.prisoes.domain.entity;
+package br.com.fiap.delegaciapolicia.prisoes.entity;
 
-import br.com.fiap.delegaciapolicia.prisoes.domain.enums.Genero;
+import br.com.fiap.delegaciapolicia.prisoes.entity.enums.Genero;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
 import lombok.*;

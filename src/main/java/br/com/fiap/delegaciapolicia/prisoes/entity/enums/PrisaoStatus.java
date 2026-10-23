@@ -1,4 +1,4 @@
-package br.com.fiap.delegaciapolicia.prisoes.domain.enums;
+package br.com.fiap.delegaciapolicia.prisoes.entity.enums;
 
 public enum PrisaoStatus {
     EM_ANDAMENTO,

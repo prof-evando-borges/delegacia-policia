@@ -1,10 +1,8 @@
 package br.com.fiap.delegaciapolicia.prisoes.service;
 
-import br.com.fiap.delegaciapolicia.prisoes.domain.entity.Cela;
-import br.com.fiap.delegaciapolicia.prisoes.domain.entity.Presidiario;
-import br.com.fiap.delegaciapolicia.prisoes.domain.entity.Prisao;
-import br.com.fiap.delegaciapolicia.prisoes.domain.enums.PrisaoStatus;
-import br.com.fiap.delegaciapolicia.prisoes.repository.PresidiarioRepository;
+import br.com.fiap.delegaciapolicia.prisoes.entity.Cela;
+import br.com.fiap.delegaciapolicia.prisoes.entity.Prisao;
+import br.com.fiap.delegaciapolicia.prisoes.entity.enums.PrisaoStatus;
 import br.com.fiap.delegaciapolicia.prisoes.repository.PrisaoRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

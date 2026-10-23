@@ -1,6 +1,6 @@
 package br.com.fiap.delegaciapolicia.prisoes.service;
 
-import br.com.fiap.delegaciapolicia.prisoes.domain.entity.Cela;
+import br.com.fiap.delegaciapolicia.prisoes.entity.Cela;
 import br.com.fiap.delegaciapolicia.prisoes.repository.CelaRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

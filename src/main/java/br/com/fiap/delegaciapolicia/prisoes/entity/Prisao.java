@@ -1,8 +1,8 @@
-package br.com.fiap.delegaciapolicia.prisoes.domain.entity;
+package br.com.fiap.delegaciapolicia.prisoes.entity;
 
 import br.com.fiap.delegaciapolicia.policiais.entity.Policial;
-import br.com.fiap.delegaciapolicia.prisoes.domain.enums.PrisaoStatus;
-import br.com.fiap.delegaciapolicia.prisoes.domain.enums.TipoPrisao;
+import br.com.fiap.delegaciapolicia.prisoes.entity.enums.PrisaoStatus;
+import br.com.fiap.delegaciapolicia.prisoes.entity.enums.TipoPrisao;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -36,15 +36,15 @@ public class Prisao {
     private String motivo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "policial_id", nullable = false)
+    @JoinColumn(name = "id_policial", nullable = false)
     private Policial policial;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "preso_id", nullable = false)
+    @JoinColumn(name = "id_preso", nullable = false)
     private Presidiario presidiario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cela_id", nullable = false)
+    @JoinColumn(name = "id_cela", nullable = false)
     private Cela cela;
 
     @Column(nullable = false)

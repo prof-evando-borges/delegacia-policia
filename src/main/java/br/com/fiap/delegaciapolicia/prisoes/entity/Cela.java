@@ -1,4 +1,4 @@
-package br.com.fiap.delegaciapolicia.prisoes.domain.entity;
+package br.com.fiap.delegaciapolicia.prisoes.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "TB_PRS_CELA",
-    uniqueConstraints = @UniqueConstraint(columnNames = {"pavilhao", "bloco", "numero"}))
+@Table(name = "TB_PRS_CELA")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

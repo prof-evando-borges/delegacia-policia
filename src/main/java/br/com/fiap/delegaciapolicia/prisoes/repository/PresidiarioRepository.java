@@ -1,6 +1,6 @@
 package br.com.fiap.delegaciapolicia.prisoes.repository;
 
-import br.com.fiap.delegaciapolicia.prisoes.domain.entity.Presidiario;
+import br.com.fiap.delegaciapolicia.prisoes.entity.Presidiario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
