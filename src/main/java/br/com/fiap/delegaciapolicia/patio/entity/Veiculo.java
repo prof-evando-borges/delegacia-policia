@@ -28,9 +28,9 @@ import java.time.LocalDate;
 public class Veiculo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "ID", length = 36)
+    private String id;
 
     @NotBlank
     @Size(max = 7)
@@ -68,7 +68,7 @@ public class Veiculo {
     @JoinColumn(name = "ID_VAGA_PATIO")
     private VagaPatio vaga;
 
-    // Tabela de outro modulo (07-boletins). guardar so o id
-    @Column(name = "ID_REGISTRO")
-    private Long idRegistro;
+    // Tabela de outro modulo (07-boletins, TB_BOL_REGISTRO_BO): guarda so o id
+    @Column(name = "ID_REGISTRO", length = 36)
+    private String idRegistro;
 }
