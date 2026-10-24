@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface AtendenteRepository extends JpaRepository<Atendente, String> {
-    Optional<Atendente> findByMatricula(String matricula);
+    Optional<Atendente> findByIdPolicial(Long idPolicial);
 }
