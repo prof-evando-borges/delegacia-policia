@@ -1,11 +1,12 @@
 package br.com.fiap.delegaciapolicia.prisoes.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "TB_PRS_CELA")
@@ -14,19 +15,28 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = "id")
 public class Cela {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @Column(name = "ID", length = 36)
+    private String id;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 10)
+    @Column(name = "PAVILHAO", nullable = false, length = 10)
     private String pavilhao;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 10)
+    @Column(name = "BLOCO", nullable = false, length = 10)
     private String bloco;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 10)
+    @Column(name = "NUMERO", nullable = false, length = 10)
     private String numero;
 
+    // O preso que ocupa a cela vem pelas prisoes (TB_PRS_PRISAO.ID_CELA)
     @OneToMany(mappedBy = "cela", fetch = FetchType.LAZY)
     private List<Prisao> prisoes = new ArrayList<>();
 }

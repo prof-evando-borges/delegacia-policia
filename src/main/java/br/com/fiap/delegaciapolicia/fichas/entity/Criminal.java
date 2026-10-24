@@ -2,11 +2,17 @@ package br.com.fiap.delegaciapolicia.fichas.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "TB_FIC_CRIMINAL")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Criminal {
 
     @Id
@@ -44,8 +50,7 @@ public class Criminal {
     @Column(name = "TELEFONE", length = 20)
     private String telefone;
 
-    @Column(name = "DATA_CRIACAO", nullable = false)
+    // Preenchida pelo banco (DEFAULT SYSTIMESTAMP)
+    @Column(name = "DATA_CRIACAO", nullable = false, insertable = false, updatable = false)
     private LocalDateTime dataCriacao;
-
-    
 }

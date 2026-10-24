@@ -36,7 +36,7 @@ src/main/resources/banco-de-dados
 ### Regras de ouro
 
 1. **Cada grupo só altera o próprio pacote e o próprio script.** `pom.xml`, `application.properties`, `compartilhado/` e `.github/` são do professor; precisa mudar algo neles? Abra uma issue.
-2. **Outro módulo se referencia pelo id, não pela entidade.** Use `Long idPolicial`, não `@ManyToOne Policial`. Relacionamentos JPA só entre entidades do mesmo módulo.
+2. **Outro módulo se referencia pelo id, não pela entidade.** Use `String idPolicial`, não `@ManyToOne Policial`. Relacionamentos JPA só entre entidades do mesmo módulo.
 3. **Para usar regras de outro módulo, chame o `service` dele**, nunca o `repository`.
 4. **Endpoints com o nome do módulo:** `/api/v1/<modulo>/...` (ex.: `/api/v1/boletins/{id}`).
 5. **O banco é criado pelos scripts.** O Hibernate só valida (`ddl-auto=validate`).

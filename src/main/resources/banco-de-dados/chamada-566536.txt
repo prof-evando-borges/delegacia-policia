@@ -1,5 +1,0 @@
-Grupo: 1 - Registro de Chamadas
-
-Nome: Kaio Galvão
-RM: 566536
-GitHub: KaioGalvao

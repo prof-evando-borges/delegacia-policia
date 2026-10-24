@@ -4,6 +4,6 @@ import br.com.fiap.delegaciapolicia.rondas.entity.RondaViatura;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
-public interface RondaViaturaRepository extends JpaRepository<RondaViatura, Long> {
-    List<RondaViatura> findByRonda_Id(Long rondaId);
+public interface RondaViaturaRepository extends JpaRepository<RondaViatura, String> {
+    List<RondaViatura> findByRonda_Id(String rondaId);
 }

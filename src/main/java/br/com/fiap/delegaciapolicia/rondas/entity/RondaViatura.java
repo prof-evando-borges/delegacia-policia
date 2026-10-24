@@ -6,9 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "TB_RND_RONDA_VIATURA", uniqueConstraints = @UniqueConstraint(name = "UK_RND_RONDA_VIATURA_PAR", columnNames = {"ID_RONDA", "ID_VIATURA"}))
 public class RondaViatura {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "ID", length = 36, nullable = false)
+    private String id;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_RONDA", nullable = false, foreignKey = @ForeignKey(name = "FK_RND_RONDA_VIATURA_RONDA"))
@@ -19,8 +19,8 @@ public class RondaViatura {
     private Viatura viatura;
 
     public RondaViatura() {}
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
     public Ronda getRonda() { return ronda; }
     public void setRonda(Ronda ronda) { this.ronda = ronda; }
     public Viatura getViatura() { return viatura; }

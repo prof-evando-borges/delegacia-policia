@@ -40,6 +40,7 @@ public class RegistroBO extends Registro {
     private TipoOcorrencia tipoOcorrencia;
 
 
+    // Policial atendente: TB_PLC_POLICIAL (modulo 01) -> so o id
     @NotBlank
     @Size(max = 36)
     @Column(name = "ID_POLICIAL", length = 36)

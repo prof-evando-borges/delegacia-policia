@@ -1,7 +1,9 @@
 package br.com.fiap.delegaciapolicia.chamadas.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,9 +20,10 @@ public class Atendente {
     @Column(name = "ID", length = 36)
     private String id;
 
-    @NotNull
-    @Column(name = "ID_POLICIAL", nullable = false, unique = true)
-    private Long idPolicial;
+    @NotBlank
+    @Size(max = 36)
+    @Column(name = "ID_POLICIAL", nullable = false, unique = true, length = 36)
+    private String idPolicial;
 
     @NotNull
     @Enumerated(EnumType.STRING)

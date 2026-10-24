@@ -1,0 +1,58 @@
+-- =====================================================
+-- 02-fichas.sql · Módulo Ficha Criminal (Grupo 9)
+-- Prefixo: TB_FIC_ · Pode referenciar: módulo 01
+-- Os IDs VARCHAR2(36) recebem o UUID gerado pela aplicação (GenerationType.UUID).
+-- =====================================================
+
+-- ---------- Integrante 1: TB_FIC_CRIMINAL ----------
+-- Cadastro da pessoa criminosa. É a tabela dona desses dados: BO (07) e Prisão (09) apontam para ela.
+CREATE TABLE TB_FIC_CRIMINAL (
+    ID              VARCHAR2(36)  NOT NULL,
+    NOME            VARCHAR2(150) NOT NULL,
+    CPF             VARCHAR2(11)  NOT NULL,
+    DATA_NASCIMENTO DATE          NOT NULL,
+    GENERO          VARCHAR2(20),
+    NACIONALIDADE   VARCHAR2(50),
+    ENDERECO        VARCHAR2(255),
+    TELEFONE        VARCHAR2(20),
+    DATA_CRIACAO    TIMESTAMP     DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT PK_FIC_CRIMINAL PRIMARY KEY (ID),
+    CONSTRAINT UK_FIC_CRIMINAL_CPF UNIQUE (CPF)
+);
+
+COMMENT ON TABLE TB_FIC_CRIMINAL IS 'Pessoa com ficha criminal';
+COMMENT ON COLUMN TB_FIC_CRIMINAL.CPF IS 'CPF somente numeros (11 digitos)';
+
+-- ---------- Integrante 2: TB_FIC_FICHA ----------
+CREATE TABLE TB_FIC_FICHA (
+    ID                  VARCHAR2(36)  NOT NULL,
+    ID_CRIMINAL         VARCHAR2(36)  NOT NULL,
+    ID_POLICIAL         VARCHAR2(36)  NOT NULL,
+    DATA_REGISTRO       DATE          NOT NULL,
+    DATA_OCORRENCIA     DATE          NOT NULL,
+    LOCAL_CRIME         VARCHAR2(255),
+    STATUS_INVESTIGACAO VARCHAR2(20)  DEFAULT 'ABERTA' NOT NULL,
+    DATA_CRIACAO        TIMESTAMP     DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT PK_FIC_FICHA PRIMARY KEY (ID),
+    CONSTRAINT FK_FIC_FICHA_CRIMINAL FOREIGN KEY (ID_CRIMINAL) REFERENCES TB_FIC_CRIMINAL (ID),
+    CONSTRAINT FK_FIC_FICHA_POLICIAL FOREIGN KEY (ID_POLICIAL) REFERENCES TB_PLC_POLICIAL (ID),
+    CONSTRAINT CK_FIC_FICHA_STATUS CHECK (STATUS_INVESTIGACAO IN ('ABERTA', 'EM_ANDAMENTO', 'ENCERRADA'))
+);
+
+COMMENT ON TABLE TB_FIC_FICHA IS 'Ficha criminal: registro de ocorrencia de um criminal';
+COMMENT ON COLUMN TB_FIC_FICHA.ID_POLICIAL IS 'Agente policial responsavel (modulo 01)';
+
+-- ---------- Integrante 3: TB_FIC_CRIME ----------
+CREATE TABLE TB_FIC_CRIME (
+    ID           VARCHAR2(36) NOT NULL,
+    ID_FICHA     VARCHAR2(36) NOT NULL,
+    DESCRICAO    CLOB         NOT NULL,
+    TIPO         VARCHAR2(60) NOT NULL,
+    GRAVIDADE    VARCHAR2(10) NOT NULL,
+    DATA_CRIACAO TIMESTAMP    DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT PK_FIC_CRIME PRIMARY KEY (ID),
+    CONSTRAINT FK_FIC_CRIME_FICHA FOREIGN KEY (ID_FICHA) REFERENCES TB_FIC_FICHA (ID),
+    CONSTRAINT CK_FIC_CRIME_GRAVIDADE CHECK (GRAVIDADE IN ('LEVE', 'MEDIA', 'GRAVE'))
+);
+
+COMMENT ON TABLE TB_FIC_CRIME IS 'Crimes registrados em uma ficha criminal';

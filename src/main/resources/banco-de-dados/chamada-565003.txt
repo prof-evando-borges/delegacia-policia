@@ -1,5 +1,0 @@
-Grupo: 1 - Registro de Chamadas
-
-Nome: Otávio Inaba
-RM: 565003
-GitHub: Otaaviio

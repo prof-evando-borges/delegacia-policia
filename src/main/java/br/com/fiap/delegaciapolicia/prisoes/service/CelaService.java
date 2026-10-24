@@ -2,11 +2,9 @@ package br.com.fiap.delegaciapolicia.prisoes.service;
 
 import br.com.fiap.delegaciapolicia.prisoes.entity.Cela;
 import br.com.fiap.delegaciapolicia.prisoes.repository.CelaRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,12 +13,12 @@ public class CelaService {
     private final CelaRepository celaRepository;
 
     @Transactional
-    public void registrar(Cela cela) {
-        celaRepository.save(cela);
+    public Cela registrar(Cela cela) {
+        return celaRepository.save(cela);
     }
 
     @Transactional
-    private Cela atualizar(Cela cela, UUID id) {
+    public Cela atualizar(Cela cela, String id) {
         Cela celaAtualizar = celaRepository.findById(id).orElseThrow();
 
         if (cela.getBloco() != null)

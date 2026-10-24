@@ -11,9 +11,9 @@ import java.util.List;
 @Table(name = "TB_RND_VIATURA")
 public class Viatura {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "ID", length = 36, nullable = false)
+    private String id;
 
     @NotBlank @Size(max = 10)
     @Column(name = "PREFIXO", length = 10, nullable = false, unique = true)
@@ -35,8 +35,8 @@ public class Viatura {
     private List<RondaViatura> participacoes = new ArrayList<>();
 
     public Viatura() {}
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
     public String getPrefixo() { return prefixo; }
     public void setPrefixo(String prefixo) { this.prefixo = prefixo; }
     public String getPlaca() { return placa; }

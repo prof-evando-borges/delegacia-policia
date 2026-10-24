@@ -2,11 +2,17 @@ package br.com.fiap.delegaciapolicia.fichas.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "TB_FIC_FICHA")
+@Getter
+@Setter
+@NoArgsConstructor
 public class FichaCriminal {
 
     @Id
@@ -21,8 +27,8 @@ public class FichaCriminal {
 
     @NotBlank
     @Size(max = 36)
-    @Column(name = "ID_POLICIAL", length = 36, nullable = false)
-    private String idPolicial; // outro módulo → só o id
+    @Column(name = "ID_POLICIAL", nullable = false, length = 36)
+    private String idPolicial; // outro módulo (TB_PLC_POLICIAL) → só o id
 
     @NotNull
     @Column(name = "DATA_REGISTRO", nullable = false)
@@ -41,13 +47,12 @@ public class FichaCriminal {
     @Column(name = "STATUS_INVESTIGACAO", length = 20, nullable = false)
     private StatusInvestigacao statusInvestigacao;
 
-    @Column(name = "DATA_CRIACAO", nullable = false)
+    // Preenchida pelo banco (DEFAULT SYSTIMESTAMP)
+    @Column(name = "DATA_CRIACAO", nullable = false, insertable = false, updatable = false)
     private LocalDateTime dataCriacao;
 
     @OneToMany(mappedBy = "ficha")
-    private java.util.List<Crime> crimes; // preencher após o Integrante 3 criar Crime
-
-    // getters e setters
+    private java.util.List<Crime> crimes = new java.util.ArrayList<>();
 
     public enum StatusInvestigacao {
         ABERTA, EM_ANDAMENTO, ENCERRADA

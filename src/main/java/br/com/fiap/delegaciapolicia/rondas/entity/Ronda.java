@@ -1,6 +1,7 @@
 package br.com.fiap.delegaciapolicia.rondas.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
@@ -11,9 +12,9 @@ import java.util.List;
 @Table(name = "TB_RND_RONDA")
 public class Ronda {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "ID", length = 36, nullable = false)
+    private String id;
 
     @NotNull
     @Column(name = "DATA_INICIO", nullable = false)
@@ -30,9 +31,10 @@ public class Ronda {
     @Column(name = "HORA_FIM", length = 5)
     private String horaFim;
 
-    @NotNull
-    @Column(name = "ID_SETOR", nullable = false)
-    private Long idSetor;
+    @NotBlank
+    @Size(max = 36)
+    @Column(name = "ID_SETOR", nullable = false, length = 36)
+    private String idSetor;
 
     @Size(max = 4000)
     @Column(name = "OBSERVACOES", length = 4000)
@@ -45,8 +47,8 @@ public class Ronda {
     private List<RondaPolicial> policiais = new ArrayList<>();
 
     public Ronda() {}
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
     public LocalDate getDataInicio() { return dataInicio; }
     public void setDataInicio(LocalDate dataInicio) { this.dataInicio = dataInicio; }
     public LocalDate getDataFim() { return dataFim; }
@@ -55,8 +57,8 @@ public class Ronda {
     public void setHoraInicio(String horaInicio) { this.horaInicio = horaInicio; }
     public String getHoraFim() { return horaFim; }
     public void setHoraFim(String horaFim) { this.horaFim = horaFim; }
-    public Long getIdSetor() { return idSetor; }
-    public void setIdSetor(Long idSetor) { this.idSetor = idSetor; }
+    public String getIdSetor() { return idSetor; }
+    public void setIdSetor(String idSetor) { this.idSetor = idSetor; }
     public String getObservacoes() { return observacoes; }
     public void setObservacoes(String observacoes) { this.observacoes = observacoes; }
     public List<RondaViatura> getViaturas() { return viaturas; }
