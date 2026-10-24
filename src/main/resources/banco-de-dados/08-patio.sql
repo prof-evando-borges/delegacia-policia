@@ -1,0 +1,34 @@
+-- =====================================================================
+-- 08-patio.sql  (Grupo 3 - Patio, prefixo TB_PAT_)
+-- =====================================================================
+CREATE TABLE TB_PAT_VAGA_PATIO (
+    ID        VARCHAR2(36)   NOT NULL,
+    CODIGO    VARCHAR2(10)   NOT NULL,
+    SETOR     VARCHAR2(30)   NOT NULL,
+    OCUPADA   NUMBER(1)      DEFAULT 0 NOT NULL,
+    CONSTRAINT PK_PAT_VAGA_PATIO PRIMARY KEY (ID),
+    CONSTRAINT UK_PAT_VAGA_PATIO_CODIGO UNIQUE (CODIGO),
+    CONSTRAINT CK_PAT_VAGA_PATIO_OCUPADA CHECK (OCUPADA IN (0, 1))
+);
+
+COMMENT ON TABLE TB_PAT_VAGA_PATIO IS 'Vagas do patio de veiculos apreendidos';
+
+CREATE TABLE TB_PAT_VEICULO (
+    ID             VARCHAR2(36)   NOT NULL,
+    ID_VAGA_PATIO  VARCHAR2(36),
+    ID_REGISTRO    VARCHAR2(36),
+    PLACA          VARCHAR2(7)    NOT NULL,
+    MARCA          VARCHAR2(40)   NOT NULL,
+    MODELO         VARCHAR2(60)   NOT NULL,
+    COR            VARCHAR2(30)   NOT NULL,
+    TIPO           VARCHAR2(20)   NOT NULL,
+    DATA_ENTRADA   DATE           NOT NULL,
+    DATA_SAIDA     DATE,
+    CONSTRAINT PK_PAT_VEICULO PRIMARY KEY (ID),
+    CONSTRAINT FK_PAT_VEICULO_VAGA_PATIO FOREIGN KEY (ID_VAGA_PATIO) REFERENCES TB_PAT_VAGA_PATIO (ID),
+    CONSTRAINT CK_PAT_VEICULO_TIPO CHECK (TIPO IN ('CARRO', 'MOTO', 'CAMINHAO')),
+    --  CONSTRAINT FK_PAT_VEICULO_REGISTRO FOREIGN KEY (ID_REGISTRO) REFERENCES TB_BOL_REGISTRO_BO (ID)
+);
+
+COMMENT ON TABLE TB_PAT_VEICULO IS 'Veiculos apreendidos que ficam no patio e a vaga que ocupam';
+COMMENT ON COLUMN TB_PAT_VEICULO.ID_REGISTRO IS 'Registro de BO associado (modulo 07)';
