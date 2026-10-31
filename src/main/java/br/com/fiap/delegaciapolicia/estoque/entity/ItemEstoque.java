@@ -1,6 +1,10 @@
 package br.com.fiap.delegaciapolicia.estoque.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -68,4 +73,8 @@ public class ItemEstoque {
     @NotNull(message = "Informe se o item está ativo")
     @Column(name = "ATIVO", nullable = false)
     private Boolean ativo = true;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "item")
+    private List<MovimentacaoEstoque> movimentacoes = new ArrayList<>();
 }
