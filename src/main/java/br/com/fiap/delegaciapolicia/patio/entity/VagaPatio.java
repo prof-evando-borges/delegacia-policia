@@ -25,19 +25,18 @@ public class VagaPatio {
     @Column(name = "ID", length = 36)
     private String id;
 
-    @NotBlank
-    @Size(max = 10)
+    @NotBlank(message = "O código da vaga é obrigatório")
+    @Size(max = 10, message = "O código da vaga deve ter no máximo 10 caracteres")
     @Column(name = "CODIGO", nullable = false, length = 10)
     private String codigo;
 
-    @NotBlank
-    @Size(max = 30)
+    @NotBlank(message = "O setor da vaga é obrigatório")
+    @Size(max = 30, message = "O setor deve ter no máximo 30 caracteres")
     @Column(name = "SETOR", nullable = false, length = 30)
     private String setor;
 
-    @NotNull
     @Column(name = "OCUPADA", nullable = false)
-    private Boolean ocupada;
+    private Boolean ocupada = false;
 
     @Override
     public String toString() {
