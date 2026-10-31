@@ -1,0 +1,263 @@
+{
+  "info": {
+    "name": "08 - Pátio",
+    "description": "CRUD de vagas e veículos do pátio (/api/v1/patio). Rodar as pastas na ordem.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "vagaId", "value": "" },
+    { "key": "veiculoId", "value": "" },
+    { "key": "codigoVaga", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "01 - Vagas",
+      "item": [
+        {
+          "name": "Cadastrar vaga (201)",
+          "event": [
+            { "listen": "prerequest", "script": { "type": "text/javascript", "exec": [
+              "pm.collectionVariables.set('codigoVaga', 'V' + Math.floor(Math.random() * 90000 + 10000));"
+            ] } },
+            { "listen": "test", "script": { "type": "text/javascript", "exec": [
+              "pm.test('201 Created', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('vagaId', pm.response.json().id);"
+            ] } }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"{{codigoVaga}}\",\n  \"setor\": \"Setor A\"\n}", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/api/v1/patio/vagas"
+          }
+        },
+        {
+          "name": "Cadastrar vaga inválida (400)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('400 Bad Request', () => pm.response.to.have.status(400));"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"\",\n  \"setor\": \"Um setor com o nome muito maior que trinta caracteres\"\n}", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/api/v1/patio/vagas"
+          }
+        },
+        {
+          "name": "Cadastrar vaga com código repetido (422)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('422 Unprocessable Content', () => pm.response.to.have.status(422));"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"{{codigoVaga}}\",\n  \"setor\": \"Setor A\"\n}", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/api/v1/patio/vagas"
+          }
+        },
+        {
+          "name": "Listar vagas (200)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/patio/vagas" }
+        },
+        {
+          "name": "Listar vagas livres (200)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/patio/vagas?ocupada=false" }
+        },
+        {
+          "name": "Listar vagas com parâmetro inválido (400)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('400 Bad Request', () => pm.response.to.have.status(400));"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/patio/vagas?ocupada=talvez" }
+        },
+        {
+          "name": "Buscar vaga por id (200)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/patio/vagas/{{vagaId}}" }
+        },
+        {
+          "name": "Buscar vaga inexistente (404)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('404 Not Found', () => pm.response.to.have.status(404));"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/patio/vagas/00000000-0000-0000-0000-000000000000" }
+        },
+        {
+          "name": "Atualizar vaga (200)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));"
+          ] } }],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"{{codigoVaga}}\",\n  \"setor\": \"Setor B\"\n}", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/api/v1/patio/vagas/{{vagaId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - Veículos",
+      "item": [
+        {
+          "name": "Cadastrar veículo (201)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.collectionVariables.set('veiculoId', pm.response.json().id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"placa\": \"PAT1A23\",\n  \"marca\": \"Fiat\",\n  \"modelo\": \"Uno\",\n  \"cor\": \"Prata\",\n  \"tipo\": \"CARRO\",\n  \"dataEntrada\": \"2026-10-01\",\n  \"vaga\": { \"id\": \"{{vagaId}}\" }\n}", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/api/v1/patio/veiculos"
+          }
+        },
+        {
+          "name": "Cadastrar veículo inválido (400)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('400 Bad Request', () => pm.response.to.have.status(400));"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"placa\": \"12-ABCD\",\n  \"marca\": \"\",\n  \"modelo\": \"Uno\",\n  \"cor\": \"Prata\",\n  \"dataEntrada\": \"2099-01-01\"\n}", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/api/v1/patio/veiculos"
+          }
+        },
+        {
+          "name": "Cadastrar veículo em vaga ocupada (422)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('422 Unprocessable Content', () => pm.response.to.have.status(422));"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"placa\": \"PAT2B34\",\n  \"marca\": \"Honda\",\n  \"modelo\": \"CG 160\",\n  \"cor\": \"Vermelha\",\n  \"tipo\": \"MOTO\",\n  \"dataEntrada\": \"2026-10-02\",\n  \"vaga\": { \"id\": \"{{vagaId}}\" }\n}", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/api/v1/patio/veiculos"
+          }
+        },
+        {
+          "name": "Cadastrar veículo com BO inexistente (404)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('404 Not Found', () => pm.response.to.have.status(404));"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"placa\": \"PAT3C45\",\n  \"marca\": \"Volvo\",\n  \"modelo\": \"FH 540\",\n  \"cor\": \"Branco\",\n  \"tipo\": \"CAMINHAO\",\n  \"dataEntrada\": \"2026-10-03\",\n  \"idRegistro\": \"00000000-0000-0000-0000-000000000000\"\n}", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/api/v1/patio/veiculos"
+          }
+        },
+        {
+          "name": "Listar veículos (200)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/patio/veiculos" }
+        },
+        {
+          "name": "Buscar veículos por placa (200)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/patio/veiculos?placa=PAT1A23" }
+        },
+        {
+          "name": "Buscar veículos por placa inválida (400)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('400 Bad Request', () => pm.response.to.have.status(400));"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/patio/veiculos?placa=abc" }
+        },
+        {
+          "name": "Listar veículos no pátio (200)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/patio/veiculos/busca/no-patio" }
+        },
+        {
+          "name": "Buscar veículo por id (200)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/patio/veiculos/{{veiculoId}}" }
+        },
+        {
+          "name": "Buscar veículo inexistente (404)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('404 Not Found', () => pm.response.to.have.status(404));"
+          ] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/patio/veiculos/00000000-0000-0000-0000-000000000000" }
+        },
+        {
+          "name": "Atualizar veículo registrando a saída (200)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('Vaga liberada', () => pm.expect(pm.response.json().vaga.ocupada).to.eql(false));"
+          ] } }],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"placa\": \"PAT1A23\",\n  \"marca\": \"Fiat\",\n  \"modelo\": \"Uno\",\n  \"cor\": \"Prata\",\n  \"tipo\": \"CARRO\",\n  \"dataEntrada\": \"2026-10-01\",\n  \"dataSaida\": \"2026-10-15\",\n  \"vaga\": { \"id\": \"{{vagaId}}\" }\n}", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/api/v1/patio/veiculos/{{veiculoId}}"
+          }
+        },
+        {
+          "name": "Atualizar veículo que já saiu (422)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('422 Unprocessable Content', () => pm.response.to.have.status(422));"
+          ] } }],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"placa\": \"PAT1A23\",\n  \"marca\": \"Fiat\",\n  \"modelo\": \"Uno\",\n  \"cor\": \"Preto\",\n  \"tipo\": \"CARRO\",\n  \"dataEntrada\": \"2026-10-01\"\n}", "options": { "raw": { "language": "json" } } },
+            "url": "{{baseUrl}}/api/v1/patio/veiculos/{{veiculoId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - Remoções",
+      "item": [
+        {
+          "name": "Remover vaga com histórico de veículos (422)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('422 Unprocessable Content', () => pm.response.to.have.status(422));"
+          ] } }],
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/v1/patio/vagas/{{vagaId}}" }
+        },
+        {
+          "name": "Remover veículo (204)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('204 No Content', () => pm.response.to.have.status(204));"
+          ] } }],
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/v1/patio/veiculos/{{veiculoId}}" }
+        },
+        {
+          "name": "Remover veículo inexistente (404)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('404 Not Found', () => pm.response.to.have.status(404));"
+          ] } }],
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/v1/patio/veiculos/{{veiculoId}}" }
+        },
+        {
+          "name": "Remover vaga (204)",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('204 No Content', () => pm.response.to.have.status(204));"
+          ] } }],
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/v1/patio/vagas/{{vagaId}}" }
+        }
+      ]
+    }
+  ]
+}
