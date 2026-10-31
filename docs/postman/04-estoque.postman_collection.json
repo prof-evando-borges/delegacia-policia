@@ -1,0 +1,2070 @@
+{
+  "info": {
+    "name": "04 - Estoque",
+    "description": "CP3 - API REST do modulo Estoque. Antes de rodar, preencha a variavel idPolicial com o id de um policial cadastrado (modulo Policiais) e suba a aplicacao em {{baseUrl}}.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Categorias",
+      "item": [
+        {
+          "name": "Cadastrar categoria (201)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', function () { pm.response.to.have.status(201); });",
+                  "pm.collectionVariables.set('idCategoria', pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Equipamento de Protecao\",\n  \"descricao\": \"Coletes, capacetes e escudos\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Cadastrar categoria - nome vazio (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"\",\n  \"descricao\": \"x\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Cadastrar categoria - nome repetido (422)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 422', function () { pm.response.to.have.status(422); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Equipamento de Protecao\",\n  \"descricao\": \"Coletes, capacetes e escudos\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Listar categorias (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar categoria por id (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias/{{idCategoria}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias",
+                "{{idCategoria}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar categoria - id inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar categoria (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias/{{idCategoria}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias",
+                "{{idCategoria}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Equipamento de Protecao Individual\",\n  \"descricao\": \"Coletes, capacetes e escudos\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Atualizar categoria - nome vazio (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias/{{idCategoria}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias",
+                "{{idCategoria}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Atualizar categoria - id inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Equipamento de Protecao\",\n  \"descricao\": \"Coletes, capacetes e escudos\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Itens",
+      "item": [
+        {
+          "name": "Cadastrar item (201)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', function () { pm.response.to.have.status(201); });",
+                  "pm.collectionVariables.set('idItem', pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"EPI-001\",\n  \"nome\": \"Colete balistico\",\n  \"descricao\": \"Colete nivel III-A\",\n  \"localizacao\": \"Armario 3\",\n  \"quantidade\": 10,\n  \"valorUnitario\": 1850.9,\n  \"ativo\": true,\n  \"categoria\": {\n    \"id\": \"{{idCategoria}}\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Cadastrar item - dados invalidos (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"\",\n  \"nome\": \"Colete balistico\",\n  \"descricao\": \"Colete nivel III-A\",\n  \"localizacao\": \"Armario 3\",\n  \"quantidade\": -1,\n  \"valorUnitario\": 1850.9,\n  \"ativo\": true,\n  \"categoria\": {\n    \"id\": \"{{idCategoria}}\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Cadastrar item - codigo repetido (422)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 422', function () { pm.response.to.have.status(422); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"EPI-001\",\n  \"nome\": \"Colete balistico\",\n  \"descricao\": \"Colete nivel III-A\",\n  \"localizacao\": \"Armario 3\",\n  \"quantidade\": 10,\n  \"valorUnitario\": 1850.9,\n  \"ativo\": true,\n  \"categoria\": {\n    \"id\": \"{{idCategoria}}\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Cadastrar item - categoria inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"EPI-002\",\n  \"nome\": \"Colete balistico\",\n  \"descricao\": \"Colete nivel III-A\",\n  \"localizacao\": \"Armario 3\",\n  \"quantidade\": 10,\n  \"valorUnitario\": 1850.9,\n  \"ativo\": true,\n  \"categoria\": {\n    \"id\": \"00000000-0000-0000-0000-000000000000\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Listar itens (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Consultar itens por nome (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens?nome=colete",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens"
+              ],
+              "query": [
+                {
+                  "key": "nome",
+                  "value": "colete"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar item por id (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/{{idItem}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "{{idItem}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar item - id inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar itens por categoria (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/busca/categoria/{{idCategoria}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "busca",
+                "categoria",
+                "{{idCategoria}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar itens por categoria inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/busca/categoria/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "busca",
+                "categoria",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar itens ativos (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/busca/ativos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "busca",
+                "ativos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar itens com estoque baixo (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/busca/estoque-baixo?limite=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "busca",
+                "estoque-baixo"
+              ],
+              "query": [
+                {
+                  "key": "limite",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar itens com estoque baixo - limite negativo (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/busca/estoque-baixo?limite=-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "busca",
+                "estoque-baixo"
+              ],
+              "query": [
+                {
+                  "key": "limite",
+                  "value": "-1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar item (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/{{idItem}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "{{idItem}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"EPI-001\",\n  \"nome\": \"Colete balistico nivel III-A\",\n  \"descricao\": \"Colete nivel III-A\",\n  \"localizacao\": \"Armario 3\",\n  \"quantidade\": 10,\n  \"valorUnitario\": 1850.9,\n  \"ativo\": true,\n  \"categoria\": {\n    \"id\": \"{{idCategoria}}\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Atualizar item - dados invalidos (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/{{idItem}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "{{idItem}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"EPI-001\",\n  \"nome\": \"\",\n  \"descricao\": \"Colete nivel III-A\",\n  \"localizacao\": \"Armario 3\",\n  \"quantidade\": 10,\n  \"valorUnitario\": 1850.9,\n  \"ativo\": true,\n  \"categoria\": {\n    \"id\": \"{{idCategoria}}\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Atualizar item - id inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"EPI-001\",\n  \"nome\": \"Colete balistico\",\n  \"descricao\": \"Colete nivel III-A\",\n  \"localizacao\": \"Armario 3\",\n  \"quantidade\": 10,\n  \"valorUnitario\": 1850.9,\n  \"ativo\": true,\n  \"categoria\": {\n    \"id\": \"{{idCategoria}}\"\n  }\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Movimentacoes",
+      "item": [
+        {
+          "name": "Cadastrar entrada (201)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', function () { pm.response.to.have.status(201); });",
+                  "pm.collectionVariables.set('idMovimentacao', pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item\": {\n    \"id\": \"{{idItem}}\"\n  },\n  \"idPolicial\": \"{{idPolicial}}\",\n  \"tipo\": \"ENTRADA\",\n  \"quantidade\": 5,\n  \"observacao\": \"Reposicao de estoque\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Cadastrar saida (201)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', function () { pm.response.to.have.status(201); });",
+                  "pm.collectionVariables.set('idMovimentacaoSaida', pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item\": {\n    \"id\": \"{{idItem}}\"\n  },\n  \"idPolicial\": \"{{idPolicial}}\",\n  \"tipo\": \"SAIDA\",\n  \"quantidade\": 3,\n  \"observacao\": \"Reposicao de estoque\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Cadastrar movimentacao - dados invalidos (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item\": {\n    \"id\": \"{{idItem}}\"\n  },\n  \"idPolicial\": \"{{idPolicial}}\",\n  \"tipo\": \"ENTRADA\",\n  \"quantidade\": 0,\n  \"observacao\": \"Reposicao de estoque\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Cadastrar saida maior que o estoque (422)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 422', function () { pm.response.to.have.status(422); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item\": {\n    \"id\": \"{{idItem}}\"\n  },\n  \"idPolicial\": \"{{idPolicial}}\",\n  \"tipo\": \"SAIDA\",\n  \"quantidade\": 9999,\n  \"observacao\": \"Reposicao de estoque\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Cadastrar movimentacao - policial inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item\": {\n    \"id\": \"{{idItem}}\"\n  },\n  \"idPolicial\": \"00000000-0000-0000-0000-000000000000\",\n  \"tipo\": \"ENTRADA\",\n  \"quantidade\": 5,\n  \"observacao\": \"Reposicao de estoque\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Cadastrar movimentacao - item inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item\": {\n    \"id\": \"00000000-0000-0000-0000-000000000000\"\n  },\n  \"idPolicial\": \"{{idPolicial}}\",\n  \"tipo\": \"ENTRADA\",\n  \"quantidade\": 5,\n  \"observacao\": \"Reposicao de estoque\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Listar movimentacoes (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Consultar movimentacoes por tipo (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes?tipo=ENTRADA",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes"
+              ],
+              "query": [
+                {
+                  "key": "tipo",
+                  "value": "ENTRADA"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Consultar movimentacoes - tipo invalido (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes?tipo=OUTRO",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes"
+              ],
+              "query": [
+                {
+                  "key": "tipo",
+                  "value": "OUTRO"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar movimentacao por id (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/{{idMovimentacao}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "{{idMovimentacao}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar movimentacao - id inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar movimentacoes por item (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/busca/item/{{idItem}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "busca",
+                "item",
+                "{{idItem}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar movimentacoes por policial (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/busca/policial/{{idPolicial}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "busca",
+                "policial",
+                "{{idPolicial}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar movimentacoes por policial inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/busca/policial/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "busca",
+                "policial",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar movimentacoes por periodo (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/busca/periodo?inicio=2020-01-01T00:00:00&fim=2099-12-31T23:59:59",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "busca",
+                "periodo"
+              ],
+              "query": [
+                {
+                  "key": "inicio",
+                  "value": "2020-01-01T00:00:00"
+                },
+                {
+                  "key": "fim",
+                  "value": "2099-12-31T23:59:59"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar movimentacoes - periodo invalido (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/busca/periodo?inicio=2099-12-31T23:59:59&fim=2020-01-01T00:00:00",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "busca",
+                "periodo"
+              ],
+              "query": [
+                {
+                  "key": "inicio",
+                  "value": "2099-12-31T23:59:59"
+                },
+                {
+                  "key": "fim",
+                  "value": "2020-01-01T00:00:00"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar movimentacao (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/{{idMovimentacao}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "{{idMovimentacao}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item\": {\n    \"id\": \"{{idItem}}\"\n  },\n  \"idPolicial\": \"{{idPolicial}}\",\n  \"tipo\": \"ENTRADA\",\n  \"quantidade\": 6,\n  \"observacao\": \"Reposicao de estoque\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Atualizar movimentacao - dados invalidos (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/{{idMovimentacao}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "{{idMovimentacao}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item\": {\n    \"id\": \"{{idItem}}\"\n  },\n  \"idPolicial\": \"{{idPolicial}}\",\n  \"tipo\": \"ENTRADA\",\n  \"quantidade\": -2,\n  \"observacao\": \"Reposicao de estoque\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Atualizar movimentacao - id inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item\": {\n    \"id\": \"{{idItem}}\"\n  },\n  \"idPolicial\": \"{{idPolicial}}\",\n  \"tipo\": \"ENTRADA\",\n  \"quantidade\": 5,\n  \"observacao\": \"Reposicao de estoque\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Item inativo",
+      "item": [
+        {
+          "name": "Desativar item (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/{{idItem}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "{{idItem}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"EPI-001\",\n  \"nome\": \"Colete balistico\",\n  \"descricao\": \"Colete nivel III-A\",\n  \"localizacao\": \"Armario 3\",\n  \"quantidade\": 10,\n  \"valorUnitario\": 1850.9,\n  \"ativo\": false,\n  \"categoria\": {\n    \"id\": \"{{idCategoria}}\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Movimentar item inativo (422)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 422', function () { pm.response.to.have.status(422); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item\": {\n    \"id\": \"{{idItem}}\"\n  },\n  \"idPolicial\": \"{{idPolicial}}\",\n  \"tipo\": \"ENTRADA\",\n  \"quantidade\": 5,\n  \"observacao\": \"Reposicao de estoque\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Reativar item (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/{{idItem}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "{{idItem}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"EPI-001\",\n  \"nome\": \"Colete balistico\",\n  \"descricao\": \"Colete nivel III-A\",\n  \"localizacao\": \"Armario 3\",\n  \"quantidade\": 10,\n  \"valorUnitario\": 1850.9,\n  \"ativo\": true,\n  \"categoria\": {\n    \"id\": \"{{idCategoria}}\"\n  }\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Remocoes",
+      "item": [
+        {
+          "name": "Remover categoria com itens (422)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 422', function () { pm.response.to.have.status(422); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias/{{idCategoria}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias",
+                "{{idCategoria}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remover item com movimentacoes (422)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 422', function () { pm.response.to.have.status(422); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/{{idItem}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "{{idItem}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remover movimentacao de saida (204)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 204', function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/{{idMovimentacaoSaida}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "{{idMovimentacaoSaida}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remover movimentacao de entrada (204)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 204', function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/{{idMovimentacao}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "{{idMovimentacao}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remover movimentacao - id inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/movimentacoes/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "movimentacoes",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remover item (204)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 204', function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/{{idItem}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "{{idItem}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remover item - id inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/itens/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "itens",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remover categoria (204)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 204', function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias/{{idCategoria}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias",
+                "{{idCategoria}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remover categoria - id inexistente (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/estoque/categorias/00000000-0000-0000-0000-000000000000",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "estoque",
+                "categorias",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "idPolicial",
+      "value": "COLE_AQUI_O_ID_DE_UM_POLICIAL"
+    },
+    {
+      "key": "idCategoria",
+      "value": ""
+    },
+    {
+      "key": "idItem",
+      "value": ""
+    },
+    {
+      "key": "idMovimentacao",
+      "value": ""
+    },
+    {
+      "key": "idMovimentacaoSaida",
+      "value": ""
+    }
+  ]
+}
