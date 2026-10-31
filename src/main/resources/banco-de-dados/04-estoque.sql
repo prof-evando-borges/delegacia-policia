@@ -63,3 +63,8 @@ COMMENT ON COLUMN TB_EST_MOVIMENTACAO.TIPO IS 'Tipo da movimentacao: ENTRADA ou 
 COMMENT ON COLUMN TB_EST_MOVIMENTACAO.QUANTIDADE IS 'Quantidade movimentada';
 COMMENT ON COLUMN TB_EST_MOVIMENTACAO.DATA_MOVIMENTACAO IS 'Data e hora da movimentacao';
 COMMENT ON COLUMN TB_EST_MOVIMENTACAO.OBSERVACAO IS 'Observacao opcional sobre a movimentacao';
+
+INSERT INTO TB_EST_CATEGORIA (ID, NOME, DESCRICAO) VALUES ('7f3c1b52-0a4e-4d5f-9a11-2b6d8e0c4a01', 'Armamento', 'Armas de fogo e acessorios');
+INSERT INTO TB_EST_CATEGORIA (ID, NOME, DESCRICAO) VALUES ('7f3c1b52-0a4e-4d5f-9a11-2b6d8e0c4a02', 'Municao', 'Municoes de uso policial');
+INSERT INTO TB_EST_CATEGORIA (ID, NOME, DESCRICAO) VALUES ('7f3c1b52-0a4e-4d5f-9a11-2b6d8e0c4a03', 'Equipamento', 'Coletes, algemas, radios e lanternas');
+INSERT INTO TB_EST_CATEGORIA (ID, NOME, DESCRICAO) VALUES ('7f3c1b52-0a4e-4d5f-9a11-2b6d8e0c4a04', 'Material de Escritorio', 'Papelaria e suprimentos administrativos');
